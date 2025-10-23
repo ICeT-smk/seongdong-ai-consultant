@@ -1163,12 +1163,12 @@ def main():
             st.caption("💡 위 정부 지원 정책 문서를 기반으로 맞춤형 조언을 제공했습니다.")
 
         
- # 챗봇 기능
+# 챗봇 기능
         st.markdown("---")
         st.markdown('<div class="section-header"><h3>💬성동SAM과 자유상담</h3></div>', unsafe_allow_html=True)
         st.caption("진단 결과에 대해 자유롭게 질문하세요!")
         
-        # 세션 상태에 채팅 히스토리 저장
+        # 세션 상태 초기화
         if 'chat_history' not in st.session_state:
             st.session_state.chat_history = []
         
@@ -1185,9 +1185,9 @@ def main():
             '지역': 지역
         }
         
-        # 채팅 히스토리 제한 (최근 10개 메시지만 유지)
-        if len(st.session_state.chat_history) > 10:
-            st.session_state.chat_history = st.session_state.chat_history[-10:]
+        # 채팅 히스토리 제한 (최근 6개만 유지 - 더 빠름!)
+        if len(st.session_state.chat_history) > 6:
+            st.session_state.chat_history = st.session_state.chat_history[-6:]
         
         # 채팅 히스토리 표시
         for message in st.session_state.chat_history:
@@ -1203,19 +1203,15 @@ def main():
             
             # AI 응답 생성 (스트리밍)
             with st.chat_message("assistant"):
-                message_placeholder = st.empty()
-                full_response = ""
-                
-                # 스트리밍 응답
                 try:
-                    # 프롬프트 생성 (generate_chatbot_response 함수 내용을 여기로)
+                    # 진단 정보
                     diagnosis_info = st.session_state.current_diagnosis
                     
-                    # 관련 문서 검색 (k=1로 줄여서 빠르게)
+                    # 관련 문서 검색 (1개만!)
                     relevant_docs = vectorstore.similarity_search(user_question, k=1)
-                    context = "\n\n".join([doc.page_content for doc in relevant_docs])
+                    context = relevant_docs[0].page_content[:300] if relevant_docs else ""
                     
-                    # 채팅 히스토리 (최근 4개만)
+                    # 최근 대화만 (2개 대화)
                     recent_history = st.session_state.chat_history[-5:] if len(st.session_state.chat_history) > 5 else st.session_state.chat_history
                     history_text = "\n".join([f"{msg['role']}: {msg['content']}" for msg in recent_history[:-1]])
                     
@@ -1227,31 +1223,32 @@ def main():
 - 업종: {diagnosis_info['업종']}
 - 지역: {diagnosis_info['지역']}
 
-[관련 정책 정보]
-{context[:500]}
+[참고 정책]
+{context}
 
-[대화 히스토리]
+[최근 대화]
 {history_text}
 
 [질문]
 {user_question}
 
-⚠️ 중요:
-1. 3-4문장으로 간결하게 답변하세요
-2. 구체적이고 실행 가능한 조언을 제공하세요
+⚠️ 중요: 2-3문장으로 간결하게 답변하세요. 구체적이고 실행 가능한 조언을 제공하세요.
 
 답변:"""
                     
-                    # 스트리밍으로 응답 생성
-                    for chunk in llm.stream(prompt):
+                    # 스트리밍으로 응답 (llm_chat 사용!)
+                    full_response = ""
+                    message_placeholder = st.empty()
+                    
+                    for chunk in llm_chat.stream(prompt):
                         full_response += chunk.content
                         message_placeholder.markdown(full_response + "▌")
                     
                     message_placeholder.markdown(full_response)
                 
                 except Exception as e:
-                    full_response = "죄송합니다. 답변 생성 중 오류가 발생했습니다. 다시 시도해주세요."
-                    message_placeholder.markdown(full_response)
+                    full_response = f"죄송합니다. 답변 생성 중 오류가 발생했습니다: {str(e)}"
+                    st.error(full_response)
             
             # AI 응답 저장
             st.session_state.chat_history.append({"role": "assistant", "content": full_response})
