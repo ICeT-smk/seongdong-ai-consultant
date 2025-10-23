@@ -190,7 +190,6 @@ def get_llm():
             model="gemini-2.5-flash",
             api_key=API_KEY,
             temperature=0.2,
-            max_output_tokens=800
             # streaming=True 제거!
         )
     except Exception as e:
