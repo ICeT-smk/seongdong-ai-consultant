@@ -183,7 +183,7 @@ PDF_FILES = [
 ]
 PDF_PATHS = [os.path.join(PDF_FOLDER, f) for f in PDF_FILES]
 
-# LLM 초기화 - 진단용 (긴 답변)
+# LLM 초기화
 @st.cache_resource
 def get_llm():
     try:
@@ -191,28 +191,12 @@ def get_llm():
             model="gemini-2.5-flash",
             api_key=API_KEY,
             temperature=0.2
-            # 토큰 제한 없음
         )
     except Exception as e:
         st.error(f"LLM 초기화 실패: {e}")
         return None
 
-# LLM 초기화 - 챗봇용 (짧고 빠름)
-@st.cache_resource
-def get_llm_chat():
-    try:
-        return ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash",
-            api_key=API_KEY,
-            temperature=0.2,
-            max_output_tokens=300  # 챗봇은 짧게!
-        )
-    except Exception as e:
-        st.error(f"LLM 초기화 실패: {e}")
-        return None
-
-llm = get_llm()           # 진단 코멘트용
-llm_chat = get_llm_chat() # 챗봇용
+llm = get_llm()
 
 # --- 리소스 로드 함수 ---
 @st.cache_resource(show_spinner=False)
@@ -1194,64 +1178,27 @@ def main():
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
         
-        # 사용자 입력
-        if user_question := st.chat_input("예: 재방문율을 높이려면 어떻게 해야 하나요?"):
-            # 사용자 메시지 추가
-            st.session_state.chat_history.append({"role": "user", "content": user_question})
-            with st.chat_message("user"):
-                st.markdown(user_question)
-            
-            # AI 응답 생성 (스트리밍)
-            with st.chat_message("assistant"):
-                try:
-                    # 진단 정보
-                    diagnosis_info = st.session_state.current_diagnosis
-                    
-                    # 관련 문서 검색 (1개만!)
-                    relevant_docs = vectorstore.similarity_search(user_question, k=1)
-                    context = relevant_docs[0].page_content[:300] if relevant_docs else ""
-                    
-                    # 최근 대화만 (2개 대화)
-                    recent_history = st.session_state.chat_history[-5:] if len(st.session_state.chat_history) > 5 else st.session_state.chat_history
-                    history_text = "\n".join([f"{msg['role']}: {msg['content']}" for msg in recent_history[:-1]])
-                    
-                    # 간결한 프롬프트
-                    prompt = f"""당신은 성동구 소상공인 AI 컨설턴트 'SAM'입니다.
-
-[진단 정보]
-- 폐업 위험도: {diagnosis_info['risk_score']:.1f}점
-- 업종: {diagnosis_info['업종']}
-- 지역: {diagnosis_info['지역']}
-
-[참고 정책]
-{context}
-
-[최근 대화]
-{history_text}
-
-[질문]
-{user_question}
-
-⚠️ 중요: 2-3문장으로 간결하게 답변하세요. 구체적이고 실행 가능한 조언을 제공하세요.
-
-답변:"""
-                    
-                    # 스트리밍으로 응답 (llm_chat 사용!)
-                    full_response = ""
-                    message_placeholder = st.empty()
-                    
-                    for chunk in llm_chat.stream(prompt):
-                        full_response += chunk.content
-                        message_placeholder.markdown(full_response + "▌")
-                    
-                    message_placeholder.markdown(full_response)
-                
-                except Exception as e:
-                    full_response = f"죄송합니다. 답변 생성 중 오류가 발생했습니다: {str(e)}"
-                    st.error(full_response)
-            
-            # AI 응답 저장
-            st.session_state.chat_history.append({"role": "assistant", "content": full_response})
+# 사용자 입력
+if user_question := st.chat_input("예: 재방문율을 높이려면 어떻게 해야 하나요?"):
+    # 사용자 메시지
+    st.session_state.chat_history.append({"role": "user", "content": user_question})
+    with st.chat_message("user"):
+        st.markdown(user_question)
+    
+    # AI 응답 생성
+    with st.chat_message("assistant"):
+        with st.spinner("💭 답변 생성 중..."):
+            ai_response = generate_chatbot_response(
+                user_question,
+                st.session_state.current_diagnosis,
+                st.session_state.chat_history,
+                vectorstore,
+                llm
+            )
+        st.markdown(ai_response)
+    
+    # AI 응답 저장
+    st.session_state.chat_history.append({"role": "assistant", "content": ai_response})
 
 if __name__ == '__main__':
     main()
