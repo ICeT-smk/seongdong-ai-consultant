@@ -187,7 +187,7 @@ try:
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         api_key=API_KEY,
-        temperature=0.3
+        temperature=0.2
     )
 except Exception as e:
     st.error(f"LLM 초기화 실패: {e}")
@@ -590,6 +590,13 @@ def generate_diagnosis_comment(risk_score, risk_factors, safe_factors, 업종, �
         
         prompt = f"""
 당신은 소상공인 경영 전문 컨설턴트입니다. 다음 진단 결과를 분석하여 사업주가 이해하기 쉽게 설명해주세요.
+
+🚨 필수 준수 사항:
+1. 아래 [관련 정부 지원 정책]에 명시된 내용만 사용하세요
+2. 정책명, 지원금액, 신청기간은 문서에 정확히 나온 내용만 언급
+3. 문서에 없는 정책은 절대 언급하지 마세요
+4. 불확실한 내용은 "관련 기관 확인 필요"라고 명시
+5. 추측이나 상상으로 답변하지 마세요
 
 **⚠️ 중요: 모든 제안과 진단에는 구체적인 수치 근거를 포함하되, 일반 사장님이 이해하기 쉬운 표현을 사용하세요.**
 
