@@ -827,9 +827,10 @@ def main():
     # 헤더
     st.markdown("""
     <div class="main-header">
-        <h1>🤖 성동구 소상공인 AI 비밀상담사</h1>
+        <h1> 성동구 소상공인을 위한 AI 비밀상담사 🤖SAM </h1>
         <p style="font-size: 1.1rem; margin-top: 0.5rem;">
-            폐업 위험 진단 (LightGBM + SHAP) 및 맞춤형 경영 전략 (RAG + Gemini 2.0 Flash)
+            SAM(Seongdong Ai-based Management)
+            경영 위험 진단 (LightGBM + SHAP) 및 맞춤형 경영 전략 (RAG + Gemini 2.5 Flash)
         </p>
         <p style="font-size: 0.85rem; margin-top: 0.8rem; opacity: 0.8;">
             📊 데이터 출처: 신한카드 성동구 소상공인 관련 데이터
