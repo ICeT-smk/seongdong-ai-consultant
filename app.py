@@ -1012,24 +1012,7 @@ def main():
 </div>
 """, unsafe_allow_html=True)
 
-                <div style="position: absolute;
-                            left: {risk_score}%;
-                            top: 35px;
-                            transform: translateX(-50%);
-                            width: 0;
-                            height: 0;
-                            border-left: 8px solid transparent;
-                            border-right: 8px solid transparent;
-                            border-top: 10px solid {bar_color};
-                            z-index: 1;"></div>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #666;">
-                <span>0 (낮음)</span>
-                <span>50 (보통)</span>
-                <span>100 (높음)</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+
         
         # 📊 실제 데이터 근거 표시
         if merchant_data:
