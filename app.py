@@ -858,6 +858,16 @@ def main():
         st.subheader("📊 시스템 상태")
         if lgbm_model is not None and df_final is not None:
             st.success("✅ 모든 리소스 로드 완료")
+            
+            # metric 글씨 크기 조절
+            st.markdown("""
+            <style>
+            [data-testid="stMetricValue"] {
+                font-size: 1.3rem;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+            
             col1, col2 = st.columns(2)
             with col1:
                 st.metric("데이터", f"{len(df_final):,}건")
@@ -892,7 +902,7 @@ def main():
     col1, col2 = st.columns([3, 1])
     with col1:
         mct_id = st.text_input(
-               "🔍 가맹점 ID 입력", value="", key="mct_input", placeholder="예: AD57E72BC9")
+               "🔍 가맹점 ID 입력(Sample ID : AD57E72BC9, 869C372EFC, E8829764C8)", value="", key="mct_input", placeholder="예: AD57E72BC9")
     st.caption("💡 우리 가게의 가맹점구분번호를 넣고 Enter 입력 후 '진단 시작' 버튼을 클릭하세요")
         
     with col2:
@@ -1031,6 +1041,7 @@ def main():
             st.markdown("---")
             st.markdown('<div class="section-header"><h3>📊 우리 가게 경영 지표 (성동구 비교)</h3></div>', unsafe_allow_html=True)
             st.caption("💡 성동구 소상공인들과 비교한 우리 가게의 위치를 확인하세요!")
+            st.caption("📌 출처: 신한카드 요식업종 데이터 86,590건 분석자료")
             
             # 데이터를 3개 컬럼으로 나눠서 표시
             data_items = list(merchant_data.items())
