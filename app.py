@@ -918,7 +918,7 @@ def main():
     col1, col2 = st.columns([3, 1])
     with col1:
         mct_id = st.text_input(
-               "🔍 가맹점 ID 입력(Sample ID : AD57E72BC9, 869C372EFC, E8829764C8)", value="", key="mct_input", placeholder="예: AD57E72BC9")
+               "🔍 가맹점 ID 입력(Sample ID : 75296C3F60(카페), 869C372EFC(카페), E8829764C8(한식))", value="", key="mct_input", placeholder="예: AD57E72BC9")
     st.caption("💡 우리 가게의 가맹점구분번호를 넣고 Enter 입력 후 '진단 시작' 버튼을 클릭하세요")
         
     with col2:
