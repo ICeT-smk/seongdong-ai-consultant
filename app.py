@@ -183,7 +183,6 @@ PDF_FILES = [
 ]
 PDF_PATHS = [os.path.join(PDF_FOLDER, f) for f in PDF_FILES]
 
-# LLM 초기화
 @st.cache_resource
 def get_llm():
     try:
@@ -191,11 +190,11 @@ def get_llm():
             model="gemini-2.5-flash",
             api_key=API_KEY,
             temperature=0.2,
-            max_output_tokens=200,
-            streaming=True
+            max_output_tokens=200
+            # streaming=True 제거!
         )
     except Exception as e:
-        st.error(f"LLM 초기化 실패: {e}")
+        st.error(f"LLM 초기화 실패: {e}")
         return None
 
 llm = get_llm()
