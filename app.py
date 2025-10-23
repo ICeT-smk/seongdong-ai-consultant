@@ -183,20 +183,36 @@ PDF_FILES = [
 ]
 PDF_PATHS = [os.path.join(PDF_FOLDER, f) for f in PDF_FILES]
 
+# LLM 초기화 - 진단용 (긴 답변)
 @st.cache_resource
 def get_llm():
     try:
         return ChatGoogleGenerativeAI(
             model="gemini-2.5-flash",
             api_key=API_KEY,
-            temperature=0.2,
-            # streaming=True 제거!
+            temperature=0.2
+            # 토큰 제한 없음
         )
     except Exception as e:
         st.error(f"LLM 초기화 실패: {e}")
         return None
 
-llm = get_llm()
+# LLM 초기화 - 챗봇용 (짧고 빠름)
+@st.cache_resource
+def get_llm_chat():
+    try:
+        return ChatGoogleGenerativeAI(
+            model="gemini-2.5-flash",
+            api_key=API_KEY,
+            temperature=0.2,
+            max_output_tokens=300  # 챗봇은 짧게!
+        )
+    except Exception as e:
+        st.error(f"LLM 초기화 실패: {e}")
+        return None
+
+llm = get_llm()           # 진단 코멘트용
+llm_chat = get_llm_chat() # 챗봇용
 
 # --- 리소스 로드 함수 ---
 @st.cache_resource(show_spinner=False)
