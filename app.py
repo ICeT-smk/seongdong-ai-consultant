@@ -833,7 +833,7 @@ def main():
                     🤖 성동 SAM <span style="font-size: 0.7rem; opacity: 0.7; font-weight: 400;">| Seongdong AI-based Management</span>
                 </h1>
                 <p style="font-size: 0.9rem; opacity: 0.85; margin: 0.3rem 0 0 0;">
-                    ✨ 성공을 위한 동반자, 성동구 소상공인 AI 비밀상담사
+                    ✨ 성공을 위한 동반자, 성동구 소상공인 AI 비밀상담사 '성동SAM'과 함께해요!
                 </p>
             </div>
         </div>
