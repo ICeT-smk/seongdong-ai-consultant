@@ -990,52 +990,54 @@ def main():
         
         # 진행 바와 레이블
         st.markdown(f"""
-        <div style="margin: 1rem 0;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <span style="color: #10b981; font-weight: 500;">← 안전</span>
-                <span style="font-weight: 600; color: {bar_color}; font-size: 1.1rem;">
-                    현재: {risk_score:.1f}점
-                </span>
-                <span style="color: #ef4444; font-weight: 500;">위험 →</span>
-            </div>
-            <div style="position: relative; margin-bottom: 3rem;">
-                <!-- 배경 그라디언트 바 -->
-                <div style="width: 100%; 
-                            height: 30px; 
-                            background: linear-gradient(to right, #10b981, #fbbf24, #ef4444);
-                            border-radius: 15px;
-                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
-                
-                <!-- 위치 마커 (원) -->
-                <div style="position: absolute;
-                            left: {risk_score}%;
-                            top: 15px;
-                            transform: translate(-50%, -50%);
-                            width: 24px;
-                            height: 24px;
-                            background: white;
-                            border: 4px solid {bar_color};
-                            border-radius: 50%;
-                            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-                            z-index: 2;"></div>
-                
-                <!-- 점수 표시 (마커 위) -->
-                <div style="position: absolute;
-                            left: {risk_score}%;
-                            top: -25px;
-                            transform: translateX(-50%);
-                            background: {bar_color};
-                            color: white;
-                            padding: 4px 12px;
-                            border-radius: 12px;
-                            font-weight: bold;
-                            font-size: 0.9rem;
-                            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                            white-space: nowrap;
-                            z-index: 3;">
-                    {risk_score:.1f}점
-                </div>
-                
+<div style="position: relative; margin-bottom: 3rem;">
+    <div style="width: 100%; 
+                height: 30px; 
+                background: linear-gradient(to right, #10b981, #fbbf24, #ef4444);
+                border-radius: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
+    
+    <div style="position: absolute;
+                left: {risk_score}%;
+                top: 15px;
+                transform: translate(-50%, -50%);
+                width: 24px;
+                height: 24px;
+                background: white;
+                border: 4px solid {bar_color};
+                border-radius: 50%;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+                z-index: 2;"></div>
+    
+    <div style="position: absolute;
+                left: {risk_score}%;
+                top: -25px;
+                transform: translateX(-50%);
+                background: {bar_color};
+                color: white;
+                padding: 4px 12px;
+                border-radius: 12px;
+                font-weight: bold;
+                font-size: 0.9rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                white-space: nowrap;
+                z-index: 3;">
+        {risk_score:.1f}점
+    </div>
+    
+    <div style="position: absolute;
+                left: {risk_score}%;
+                top: 35px;
+                transform: translateX(-50%);
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 10px solid {bar_color};
+                z-index: 1;"></div>
+</div>
+""", unsafe_allow_html=True)
+
                 <!-- 아래 화살표 -->
                 <div style="position: absolute;
                             left: {risk_score}%;
