@@ -1038,7 +1038,6 @@ def main():
 </div>
 """, unsafe_allow_html=True)
 
-                <!-- 아래 화살표 -->
                 <div style="position: absolute;
                             left: {risk_score}%;
                             top: 35px;
