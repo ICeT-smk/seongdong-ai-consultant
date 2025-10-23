@@ -841,13 +841,13 @@ def main():
                     border-radius: 10px; 
                     color: white;
                     margin-bottom: 1rem;">
-            <h3 style="color: white; margin-top: 0;">🚀 간편한 5단계</h3>
+            <h3 style="color: white; margin-top: 0;">🚀 Quick Guide</h3>
             <div style="font-size: 1.1rem; line-height: 2rem;">
-                <b>1️⃣</b> 가맹점 ID 입력<br>
+                <b>1️⃣</b> 가맹점ID 입력<br>
                 <b>2️⃣</b> '진단 시작' 클릭<br>
                 <b>3️⃣</b> AI 코멘트 확인<br>
                 <b>4️⃣</b> 맞춤형 전략 생성<br>
-                <b>5️⃣</b> 챗봇으로 상담
+                <b>5️⃣</b> 챗봇으로 추가 상담
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -892,11 +892,10 @@ def main():
     col1, col2 = st.columns([3, 1])
     with col1:
         mct_id = st.text_input(
-            "진단할 가맹점 ID (ENCODED_MCT)",
-            value="000F03E44A",
-            help="integrated_final_dataset.csv의 ENCODED_MCT 컬럼 값을 입력하세요",
-            label_visibility="collapsed"
-        )
+               "🔍 가맹점 ID 입력", value="", key="mct_input", placeholder="예: AD57E72BC9"
+)
+st.caption("💡 우리 가게의 가맹점구분번호를 넣고 Enter 입력 후 '진단 시작' 버튼을 클릭하세요")
+        
     with col2:
         diagnose_btn = st.button("🏥 진단 시작", type="primary", use_container_width=True)
     
