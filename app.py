@@ -862,7 +862,6 @@ def main():
                 <b>2️⃣</b> '진단 시작' 클릭<br>
                 <b>3️⃣</b> AI 코멘트 확인<br>
                 <b>4️⃣</b> 맞춤형 전략 생성<br>
-                <b>5️⃣</b> 챗봇으로 추가 상담
             </div>
         </div>
         """, unsafe_allow_html=True)
