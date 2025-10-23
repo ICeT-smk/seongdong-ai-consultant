@@ -1100,16 +1100,31 @@ def main():
                 # PDF 파일명 정리
                 display_name = source.replace('.pdf', '').replace('_', ' ')
                 
-                # 파일 아이콘과 함께 표시
+                # GitHub raw URL 생성
+                github_url = f"https://raw.githubusercontent.com/ICeT-smk/seongdong-ai-consultant/main/data/pdf/{source}"
+                
+                # 파일 아이콘과 다운로드 버튼
                 st.markdown(f"""
                 <div style="background: #f8fafc; 
                             padding: 0.8rem; 
                             border-radius: 5px; 
                             border-left: 3px solid #667eea;
                             margin-bottom: 0.5rem;">
-                    <div style="display: flex; align-items: center;">
-                        <span style="font-size: 1.5rem; margin-right: 0.5rem;">📄</span>
-                        <span style="font-weight: 500;">{display_name}</span>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-size: 1.5rem; margin-right: 0.5rem;">📄</span>
+                            <span style="font-weight: 500;">{display_name}</span>
+                        </div>
+                        <a href="{github_url}" download="{source}" 
+                           style="text-decoration: none; 
+                                  background: #667eea; 
+                                  color: white; 
+                                  padding: 0.4rem 0.8rem; 
+                                  border-radius: 5px; 
+                                  font-size: 0.85rem;
+                                  white-space: nowrap;">
+                            📥 다운로드
+                        </a>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
