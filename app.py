@@ -826,40 +826,24 @@ def generate_rag_strategy(risk_score, risk_factors, safe_factors, 업종, 지역
 def main():
     # 헤더
     st.markdown("""
-    <div class="main-header">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+    <div class="main-header" style="padding: 1rem 2rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
             <div>
-                <h1 style="margin: 0; font-size: 3.5rem; font-weight: 700; line-height: 1;">
-                    성공을 위한 동반자 선생님, '성동SAM'과 함께해요
+                <h1 style="margin: 0; font-size: 1.8rem; font-weight: 700; line-height: 1.2;">
+                    🤖 성동 SAM <span style="font-size: 0.7rem; opacity: 0.7; font-weight: 400;">| Seongdong AI-based Management</span>
                 </h1>
-                <p style="font-size: 0.95rem; opacity: 0.8; margin: 0.5rem 0 0 0.2rem; letter-spacing: 1px;">
-                    SAM | <strong>S</strong>eongdong <strong>A</strong>I-based <strong>M</strong>anagement
-                </p>
-            </div>
-            <div style="font-size: 4rem; opacity: 0.3;">
-                🤖
-            </div>
-        </div>
-        <h2 style="font-size: 1.3rem; font-weight: 500; margin: 0; opacity: 0.95; border-left: 4px solid rgba(255,255,255,0.5); padding-left: 1rem;">
-            ✨ 성공을 위한 동반자, 성동구 소상공인 AI 비밀상담사 'SAM'
-        </h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                <p style="font-size: 0.9rem; margin: 0; opacity: 0.9;">
-                    📈 <strong>폐업 위험 진단</strong><br/>
-                    <span style="font-size: 0.8rem; opacity: 0.75;">LightGBM + SHAP 기반 분석</span>
-                </p>
-            </div>
-            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                <p style="font-size: 0.9rem; margin: 0; opacity: 0.9;">
-                    💡 <strong>맞춤형 경영 전략</strong><br/>
-                    <span style="font-size: 0.8rem; opacity: 0.75;">RAG + Gemini 2.5 Flash</span>
+                <p style="font-size: 0.9rem; opacity: 0.85; margin: 0.3rem 0 0 0;">
+                    ✨ 성공을 위한 동반자, 성동구 소상공인 AI 비밀상담사
                 </p>
             </div>
         </div>
-        <p style="font-size: 0.75rem; margin-top: 1.2rem; opacity: 0.65; text-align: center;">
-            📊 신한카드 성동구 소상공인 데이터 86,590건 분석
-        </p>
+        <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.2);">
+            <span style="font-size: 0.8rem; opacity: 0.8;">📈 폐업 위험 진단 (LightGBM+SHAP)</span>
+            <span style="opacity: 0.5;">|</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">💡 맞춤형 전략 (RAG+Gemini 2.5)</span>
+            <span style="opacity: 0.5;">|</span>
+            <span style="font-size: 0.75rem; opacity: 0.6;">📊 신한카드 데이터 86,590건</span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
