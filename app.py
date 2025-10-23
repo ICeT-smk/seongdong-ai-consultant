@@ -1144,7 +1144,7 @@ def main():
                 """, unsafe_allow_html=True)
             
             st.caption("💡 위 정부 지원 정책 문서를 기반으로 맞춤형 조언을 제공했습니다.")
-        """
+        '''
         # RAG 전략 생성
         st.markdown("---")
         st.markdown('<div class="section-header"><h3>🎯 맞춤형 경영 전략 (근거 기반)</h3></div>', unsafe_allow_html=True)
@@ -1233,7 +1233,7 @@ def main():
                     """, unsafe_allow_html=True)
                 
                 st.caption("💡 위 정책 문서와 우수사례집을 기반으로 맞춤형 전략을 제공했습니다.") 
-"""
+'''
         
         # 챗봇 기능
         st.markdown("---")
