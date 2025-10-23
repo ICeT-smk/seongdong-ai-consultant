@@ -131,7 +131,7 @@ os.environ["GEMINI_API_KEY"] = API_KEY
 # 현재 스크립트의 디렉토리 기준
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 DATA_FOLDER = os.path.join(BASE_PATH, 'data')
-PDF_FOLDER = os.path.join(DATA_FOLDER, 'pdfs')
+PDF_FOLDER = os.path.join(DATA_FOLDER, 'pdf')
 
 MODEL_PATH = os.path.join(DATA_FOLDER, 'lgbm_closure_predictor.pkl')
 DATA_PATH = os.path.join(DATA_FOLDER, 'integrated_final_dataset.csv')
@@ -866,7 +866,7 @@ def main():
             st.code(os.path.basename(DATA_PATH), language=None)
             
             st.caption("**PDF 파일**")
-            st.code("./data/pdfs/ (6개)", language=None)
+            st.code("./data/pdf/ (6개)", language=None)
     
     if lgbm_model is None or df_final is None:
         st.error("❌ 리소스 로드에 실패했습니다. 사이드바의 시스템 정보를 확인하세요.")
