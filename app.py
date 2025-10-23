@@ -191,7 +191,7 @@ def get_llm():
         api_key=API_KEY,
         temperature=0.2,
         max_output_tokens=200,  # 답변 길이 제한 (빠름!)
-        streaming=True  # 스트리밍 명시
+        streaming=True)  # 스트리밍 명시
     
     except Exception as e:
         st.error(f"LLM 초기화 실패: {e}")
