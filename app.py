@@ -830,7 +830,7 @@ def main():
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
             <div>
                 <h1 style="margin: 0; font-size: 3.5rem; font-weight: 700; line-height: 1;">
-                    Mr.성동
+                    성공을 위한 동반자 선생님, '성동SAM'과 함께해요
                 </h1>
                 <p style="font-size: 0.95rem; opacity: 0.8; margin: 0.5rem 0 0 0.2rem; letter-spacing: 1px;">
                     SAM | <strong>S</strong>eongdong <strong>A</strong>I-based <strong>M</strong>anagement
@@ -841,7 +841,7 @@ def main():
             </div>
         </div>
         <h2 style="font-size: 1.3rem; font-weight: 500; margin: 0; opacity: 0.95; border-left: 4px solid rgba(255,255,255,0.5); padding-left: 1rem;">
-            ✨ 성공을 위한 동반자, 성동구 소상공인 AI 비밀상담사
+            ✨ 성공을 위한 동반자, 성동구 소상공인 AI 비밀상담사 'SAM'
         </h2>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
             <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
