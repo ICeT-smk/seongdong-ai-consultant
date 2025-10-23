@@ -888,7 +888,7 @@ def main():
             with col1:
                 st.metric("데이터", f"{len(df_final):,}건")
             with col2:
-                st.metric("PDF", "6개")
+                st.metric("PDF", "7개")
         else:
             st.error("❌ 리소스 로드 실패")
         
