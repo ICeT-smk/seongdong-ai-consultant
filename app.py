@@ -185,7 +185,7 @@ PDF_PATHS = [os.path.join(PDF_FOLDER, f) for f in PDF_FILES]
 # LLM 초기화
 try:
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash-exp",
+        model="ggemini-2.5-flash",
         api_key=API_KEY,
         temperature=0.3
     )
