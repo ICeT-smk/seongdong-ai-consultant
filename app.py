@@ -892,12 +892,11 @@ def main():
     col1, col2 = st.columns([3, 1])
     with col1:
         mct_id = st.text_input(
-               "🔍 가맹점 ID 입력", value="", key="mct_input", placeholder="예: AD57E72BC9"
-)
-st.caption("💡 우리 가게의 가맹점구분번호를 넣고 Enter 입력 후 '진단 시작' 버튼을 클릭하세요")
+               "🔍 가맹점 ID 입력", value="", key="mct_input", placeholder="예: AD57E72BC9")
+    st.caption("💡 우리 가게의 가맹점구분번호를 넣고 Enter 입력 후 '진단 시작' 버튼을 클릭하세요")
         
     with col2:
-        diagnose_btn = st.button("🏥 진단 시작", type="primary", use_container_width=True)
+         diagnose_btn = st.button("🏥 진단 시작", type="primary", use_container_width=True)
     
     # 진단 실행
     if diagnose_btn and mct_id:
