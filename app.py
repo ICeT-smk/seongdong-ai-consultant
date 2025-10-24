@@ -1104,14 +1104,14 @@ def main():
             analysis_comment, diagnosis_sources = generate_diagnosis_comment(
             risk_score, risk_factors, safe_factors, 업종, 지역, llm, vectorstore, merchant_data
         )
-        # 세션에 저장
-        st.session_state.diagnosis_comment = analysis_comment
-        st.session_state.diagnosis_sources = diagnosis_sources
-        st.session_state.current_mct_id = mct_id
+            # 세션에 저장
+            st.session_state.diagnosis_comment = analysis_comment
+            st.session_state.diagnosis_sources = diagnosis_sources
+            st.session_state.current_mct_id = mct_id
         else:
         # 저장된 결과 사용 (재생성 안 함!)
-        analysis_comment = st.session_state.diagnosis_comment
-        diagnosis_sources = st.session_state.diagnosis_sources
+            analysis_comment = st.session_state.diagnosis_comment
+            diagnosis_sources = st.session_state.diagnosis_sources
 
         st.markdown(f'<div class="info-box">{analysis_comment}</div>', unsafe_allow_html=True)
         
