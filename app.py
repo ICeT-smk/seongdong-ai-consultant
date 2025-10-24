@@ -136,7 +136,7 @@ PDF_FOLDER = os.path.join(DATA_FOLDER, 'pdf')
 MODEL_PATH = os.path.join(DATA_FOLDER, 'lgbm_closure_predictor.pkl')
 DATA_PATH = os.path.join(DATA_FOLDER, 'integrated_final_dataset.csv')
 
-# 컬럼명 한글 매핑 사전
+# 컬럼명 한글 매핑 사전(csv파일기반)
 COLUMN_KOREAN_NAMES = {
     'OPERATING_DAYS': '운영 기간',
     'MCT_OPE_MS_CN_RANK': '운영개월수 등급',
