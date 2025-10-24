@@ -1094,25 +1094,16 @@ def main():
                             <div style="font-size: 1.1rem; font-weight: bold; color: #1a1a1a;">{interpreted_value}</div>
                         </div>
                         """, unsafe_allow_html=True)
+        
         # AI 분석 코멘트
         st.markdown("---")
         st.markdown('<div class="section-header"><h3>💬 AI 진단 코멘트 (근거 기반)</h3></div>', unsafe_allow_html=True)
-
-        # 진단 코멘트 캐싱 (같은 가맹점이면 재생성 안 함)
-        if 'diagnosis_comment' not in st.session_state or st.session_state.get('current_mct_id') != mct_id:
+        
         with st.spinner("🤖 AI가 진단 결과를 분석하고 정책을 검색하고 있습니다..."):
-        analysis_comment, diagnosis_sources = generate_diagnosis_comment(
-            risk_score, risk_factors, safe_factors, 업종, 지역, llm, vectorstore, merchant_data
-        )
-        # 세션에 저장
-        st.session_state.diagnosis_comment = analysis_comment
-        st.session_state.diagnosis_sources = diagnosis_sources
-        st.session_state.current_mct_id = mct_id
-        else:
-        # 저장된 결과 사용 (재생성 안 함!)
-        analysis_comment = st.session_state.diagnosis_comment
-        diagnosis_sources = st.session_state.diagnosis_sources
-
+            analysis_comment, diagnosis_sources = generate_diagnosis_comment(
+                risk_score, risk_factors, safe_factors, 업종, 지역, llm, vectorstore, merchant_data
+            )
+        
         st.markdown(f'<div class="info-box">{analysis_comment}</div>', unsafe_allow_html=True)
         
         # 참고 자료 출처 표시
@@ -1157,49 +1148,36 @@ def main():
 
         
 # 챗봇 기능
-st.markdown("---")
-st.markdown('<div class="section-header"><h3>💬성동SAM과 자유상담</h3></div>', unsafe_allow_html=True)
-st.caption("진단 결과에 대해 자유롭게 질문하세요!")
-
-# 세션 상태 초기화
-if 'chat_history' not in st.session_state:
-    st.session_state.chat_history = []
-
-if 'current_diagnosis' not in st.session_state:
-    st.session_state.current_diagnosis = None
-
-# 현재 진단 정보 저장
-st.session_state.current_diagnosis = {
-    'mct_id': mct_id,
-    'risk_score': risk_score,
-    'risk_factors': risk_factors,
-    'safe_factors': safe_factors,
-    '업종': 업종,
-    '지역': 지역
-}
-
-# 채팅 히스토리 제한
-if len(st.session_state.chat_history) > 6:
-    st.session_state.chat_history = st.session_state.chat_history[-6:]
-
-# 채팅 히스토리 표시
-for message in st.session_state.chat_history:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-# 자동 스크롤 (새로 추가!)
-st.markdown('<div id="chat-bottom"></div>', unsafe_allow_html=True)
-st.markdown("""
-<script>
-    setTimeout(function() {
-        const element = document.getElementById('chat-bottom');
-        if (element) {
-            element.scrollIntoView({behavior: 'smooth', block: 'end'});
+        st.markdown("---")
+        st.markdown('<div class="section-header"><h3>💬성동SAM과 자유상담</h3></div>', unsafe_allow_html=True)
+        st.caption("진단 결과에 대해 자유롭게 질문하세요!")
+        
+        # 세션 상태 초기화
+        if 'chat_history' not in st.session_state:
+            st.session_state.chat_history = []
+        
+        if 'current_diagnosis' not in st.session_state:
+            st.session_state.current_diagnosis = None
+        
+        # 현재 진단 정보 저장
+        st.session_state.current_diagnosis = {
+            'mct_id': mct_id,
+            'risk_score': risk_score,
+            'risk_factors': risk_factors,
+            'safe_factors': safe_factors,
+            '업종': 업종,
+            '지역': 지역
         }
-    }, 100);
-</script>
-""", unsafe_allow_html=True)
-
+        
+        # 채팅 히스토리 제한 (최근 6개만 유지 - 더 빠름!)
+        if len(st.session_state.chat_history) > 6:
+            st.session_state.chat_history = st.session_state.chat_history[-6:]
+        
+        # 채팅 히스토리 표시
+        for message in st.session_state.chat_history:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+        
 # 사용자 입력
 if user_question := st.chat_input("예: 재방문율을 높이려면 어떻게 해야 하나요?"):
     # 사용자 메시지
