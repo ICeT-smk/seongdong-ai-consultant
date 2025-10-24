@@ -127,15 +127,14 @@ if not API_KEY:
 
 os.environ["GEMINI_API_KEY"] = API_KEY
 
-# ===== 📂 경로 설정 (배포용 상대 경로 - 수정됨) =====
-# Streamlit Cloud 환경에서 __file__ 오류 방지 및 안정적인 경로 설정
-# os.getcwd()는 현재 작업 디렉토리(프로젝트 루트)를 반환합니다.
-DATA_FOLDER = 'data'
+# ===== 📂 경로 설정 (배포용 상대 경로) =====
+# 현재 스크립트의 디렉토리 기준
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+DATA_FOLDER = os.path.join(BASE_PATH, 'data')
 PDF_FOLDER = os.path.join(DATA_FOLDER, 'pdf')
 
 MODEL_PATH = os.path.join(DATA_FOLDER, 'lgbm_closure_predictor.pkl')
 DATA_PATH = os.path.join(DATA_FOLDER, 'integrated_final_dataset.csv')
-
 
 # 컬럼명 한글 매핑 사전
 COLUMN_KOREAN_NAMES = {
