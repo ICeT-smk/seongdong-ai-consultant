@@ -1094,22 +1094,23 @@ def main():
                             <div style="font-size: 1.1rem; font-weight: bold; color: #1a1a1a;">{interpreted_value}</div>
                         </div>
                         """, unsafe_allow_html=True)
-        # AI 분석 코멘트
+# AI 분석 코멘트
         st.markdown("---")
         st.markdown('<div class="section-header"><h3>💬 AI 진단 코멘트 (근거 기반)</h3></div>', unsafe_allow_html=True)
 
         # 진단 코멘트 캐싱 (같은 가맹점이면 재생성 안 함)
         if 'diagnosis_comment' not in st.session_state or st.session_state.get('current_mct_id') != mct_id:
             with st.spinner("🤖 AI가 진단 결과를 분석하고 정책을 검색하고 있습니다..."):
-            analysis_comment, diagnosis_sources = generate_diagnosis_comment(
-            risk_score, risk_factors, safe_factors, 업종, 지역, llm, vectorstore, merchant_data
-        )
-            # 세션에 저장
-            st.session_state.diagnosis_comment = analysis_comment
-            st.session_state.diagnosis_sources = diagnosis_sources
-            st.session_state.current_mct_id = mct_id
+                # 👈 이 줄부터 들여쓰기를 정확히 맞췄습니다.
+                analysis_comment, diagnosis_sources = generate_diagnosis_comment(
+                    risk_score, risk_factors, safe_factors, 업종, 지역, llm, vectorstore, merchant_data
+                )
+                # 세션에 저장
+                st.session_state.diagnosis_comment = analysis_comment
+                st.session_state.diagnosis_sources = diagnosis_sources
+                st.session_state.current_mct_id = mct_id
         else:
-        # 저장된 결과 사용 (재생성 안 함!)
+            # 저장된 결과 사용 (재생성 안 함!)
             analysis_comment = st.session_state.diagnosis_comment
             diagnosis_sources = st.session_state.diagnosis_sources
 
