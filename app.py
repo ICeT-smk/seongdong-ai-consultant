@@ -136,7 +136,7 @@ PDF_FOLDER = os.path.join(DATA_FOLDER, 'pdf')
 MODEL_PATH = os.path.join(DATA_FOLDER, 'lgbm_closure_predictor.pkl')
 DATA_PATH = os.path.join(DATA_FOLDER, 'integrated_final_dataset.csv')
 
-# 컬럼명 한글 매핑 사전(csv파일기반)
+# 컬럼명 한글 매핑 사전
 COLUMN_KOREAN_NAMES = {
     'OPERATING_DAYS': '운영 기간',
     'MCT_OPE_MS_CN_RANK': '운영개월수 등급',
@@ -1197,8 +1197,9 @@ if user_question := st.chat_input("예: 재방문율을 높이려면 어떻게 �
             )
         st.markdown(ai_response)
     
-    # AI 응답저장
+    # AI 응답 저장
     st.session_state.chat_history.append({"role": "assistant", "content": ai_response})
 
 if __name__ == '__main__':
     main()
+            
