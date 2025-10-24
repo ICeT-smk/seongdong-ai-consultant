@@ -1101,7 +1101,7 @@ def main():
         # 진단 코멘트 캐싱 (같은 가맹점이면 재생성 안 함)
         if 'diagnosis_comment' not in st.session_state or st.session_state.get('current_mct_id') != mct_id:
             with st.spinner("🤖 AI가 진단 결과를 분석하고 정책을 검색하고 있습니다..."):
-            analysis_comment, diagnosis_sources = generate_diagnosis_comment(
+        analysis_comment, diagnosis_sources = generate_diagnosis_comment(
             risk_score, risk_factors, safe_factors, 업종, 지역, llm, vectorstore, merchant_data
         )
         # 세션에 저장
