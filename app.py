@@ -1197,7 +1197,7 @@ if user_question := st.chat_input("예: 재방문율을 높이려면 어떻게 �
             )
         st.markdown(ai_response)
     
-    # AI 응답저장
+    # AI 응답 저장
     st.session_state.chat_history.append({"role": "assistant", "content": ai_response})
 
 if __name__ == '__main__':
